@@ -17,6 +17,7 @@
     <title>Property || Hometown Heating Services Co.</title>
     <!-----Tailwind css---->
     <link rel="stylesheet" href="output/tailwind.css">
+    <link rel="stylesheet" href="css/datepicker.min.css">
 </head>
 <!--====================body====================-->
 
@@ -73,13 +74,14 @@
                         <a class="hover:underline" href="#">Polidies</a>
                     </li>
                     <!--========-->
-                    <li>
+                    <li x-data="{isDropdownOpen : false}" @mouseover="isDropdownOpen = true"
+                        @mouseout="isDropdownOpen = false" class="relative">
                         <!--========-->
-                        <button class=" flex items-center space-x-2">
+                        <button class="flex items-center space-x-2">
                             <!--========-->
                             <span>About</span>
                             <!--========-->
-                            <span>
+                            <span :class="{'-rotate-180' : isDropdownOpen}">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" fill="currentColor"
                                     class="h-4 w-4">
                                     <path
@@ -87,6 +89,24 @@
                                 </svg>
                             </span>
                         </button>
+                        <!--========-->
+                        <div x-cloak x-show="isDropdownOpen" class="pt-2 absolute -left-5 top-full z-30">
+                            <ol
+                                class="p-5 rounded-md shadow-lg bg-white text-slate-950 font-medium w-full min-w-184 space-y-4">
+                                <!--========-->
+                                <li>
+                                    <a class="hover:underline" href="#">Demo</a>
+                                </li>
+                                <!--========-->
+                                <li>
+                                    <a class="hover:underline" href="#">Demo</a>
+                                </li>
+                                <!--========-->
+                                <li>
+                                    <a class="hover:underline" href="#">Demo</a>
+                                </li>
+                            </ol>
+                        </div>
                     </li>
                     <!--========-->
                     <li>
@@ -99,13 +119,13 @@
                 <!--========-->
                 <button @click="isHamburgerOpen = !isHamburgerOpen" class="text-white">
                     <!--========-->
-                    <svg x-show="isHamburgerOpen===false" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
+                    <svg x-cloak x-show="isHamburgerOpen===false" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                     <!--========-->
-                    <svg x-show="isHamburgerOpen===true" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
+                    <svg x-cloak x-show="isHamburgerOpen===true" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
@@ -139,13 +159,13 @@
                                 <a class="hover:underline" href="#">Polidies</a>
                             </li>
                             <!--========-->
-                            <li>
+                            <li x-data="{isDropdownOpen : false}" @click.away="isDropdownOpen = false" class="relative">
                                 <!--========-->
-                                <button class=" flex items-center space-x-2">
+                                <button @click="isDropdownOpen = !isDropdownOpen" class=" flex items-center space-x-2">
                                     <!--========-->
                                     <span>About</span>
                                     <!--========-->
-                                    <span>
+                                    <span :class="{'-rotate-180' : isDropdownOpen}" class="duration-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
                                             fill="currentColor" class="h-4 w-4">
                                             <path
@@ -153,6 +173,23 @@
                                         </svg>
                                     </span>
                                 </button>
+                                <!--========-->
+                                <div x-show="isDropdownOpen" x-collapse.duration.500ms x-clock>
+                                    <ol class="space-y-8 pt-8">
+                                        <!--========-->
+                                        <li>
+                                            <a class="hover:underline" href="#">Demo</a>
+                                        </li>
+                                        <!--========-->
+                                        <li>
+                                            <a class="hover:underline" href="#">Demo</a>
+                                        </li>
+                                        <!--========-->
+                                        <li>
+                                            <a class="hover:underline" href="#">Demo</a>
+                                        </li>
+                                    </ol>
+                                </div>
                             </li>
                             <!--========-->
                             <li>
@@ -344,7 +381,7 @@
                     <!--========-->
                     <div class="lg:pl-14">
                         <!--========-->
-                        <div class="md:px-14 px-5 md:py-20 py-10 rounded-md bg-white">
+                        <form action="#" class="md:px-14 px-5 md:py-20 py-10 rounded-md bg-white">
                             <!--========-->
                             <div class="relative">
                                 <!--========-->
@@ -357,12 +394,14 @@
                             <!--========-->
                             <div class="space-y-7 md:mt-20 mt-10">
                                 <!--========-->
-                                <div
-                                    class=" flex items-center justify-between text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer">
+                                <div class="relative">
                                     <!--========-->
-                                    <p class="text-xl text-slate-500">Check In</p>
+                                    <input
+                                        class="text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer text-xl placeholder-slate-500 w-full outline-none"
+                                        type="text" id="CheckInDate" placeholder="Check In">
                                     <!--========-->
-                                    <div>
+                                    <div
+                                        class=" absolute md:right-7 right-5 inset-y-0 flex items-center text-slate-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                             fill="currentColor" class="h-7 w-7">
                                             <path
@@ -371,12 +410,14 @@
                                     </div>
                                 </div>
                                 <!--========-->
-                                <div
-                                    class=" flex items-center justify-between text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer">
+                                <div class="relative">
                                     <!--========-->
-                                    <p class="text-xl text-slate-500">Check Out</p>
+                                    <input
+                                        class="text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer text-xl placeholder-slate-500 w-full outline-none"
+                                        type="text" id="CheckOutDate" placeholder="Check Out">
                                     <!--========-->
-                                    <div>
+                                    <div
+                                        class=" absolute md:right-7 right-5 inset-y-0 flex items-center text-slate-500">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                             fill="currentColor" class="h-7 w-7">
                                             <path
@@ -385,28 +426,42 @@
                                     </div>
                                 </div>
                                 <!--========-->
-                                <div
-                                    class=" flex items-center justify-between text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer">
+                                <div x-data="{selected : 'Guest' , isDropdownOpen : false}"
+                                    @click.away="isDropdownOpen = false" class="relative text-xl text-slate-500">
                                     <!--========-->
-                                    <p class="text-xl text-slate-500">Guests</p>
+                                    <a href="#" @click.prevent="isDropdownOpen = !isDropdownOpen"
+                                        class="flex items-center justify-between text-slate-500 p-5 md:p-7 rounded-md border cursor-pointer w-full">
+                                        <!--========-->
+                                        <p x-text="selected"></p>
+                                        <!--========-->
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </div>
+                                    </a>
                                     <!--========-->
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                        </svg>
+                                    <div @click="isDropdownOpen = false" x-show="isDropdownOpen" x-cloak
+                                        class="p-5 py-4 rounded-md shadow-lg bg-white border border-t-0 rounded-t-none w-full absolute top-full z-30 space-y-4">
+                                        <!--========-->
+                                        <p class="cursor-pointer" @click="selected = 'Guest'">Guest</p>
+                                        <!--========-->
+                                        <p class="cursor-pointer" @click="selected = 'Guest 1'">Guest 1</p>
+                                        <!--========-->
+                                        <p class="cursor-pointer" @click="selected = 'Guest 2'">Guest 2</p>
                                     </div>
                                 </div>
                             </div>
                             <!--========-->
                             <div class="mt-8">
                                 <!--========-->
-                                <a href="#"
+                                <button type="submit"
                                     class="uppercase px-6 py-4 bg-slate-950 border-2 border-slate-950 hover:bg-transparent hover:text-slate-900 text-white rounded-md duration-200 block max-w-max mx-auto">Check
-                                    Availability</a>
+                                    Availability</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -418,7 +473,7 @@
         <!-- ==========section 004========== -->
         <section class="mx-auto max-w-7xl px-5 md:px-10 lg:px-5 py-24 pb-0 lg:pb-24 relative">
             <!--========-->
-            <div class="bg-slate-450 bg-opacity-40 w-full px-12 py-16 rounded-md text-center">
+            <div class="bg-slate-450 bg-opacity-40 w-full md:px-12 px-8 md:py-16 py-10 rounded-md text-center">
                 <!--========-->
                 <h2 class="text-slate-900 mb-10 font-semibold text-4xl">Please Note These Key Details:</h2>
                 <!--========-->
@@ -867,11 +922,11 @@
                             Yachats, Oregon 97498</p>
                     </li>
                     <!--========-->
-                    <li class=" flex space-x-4 lg:text-lg text-base font-light">
+                    <li class=" flex space-x-4 lg:text-lg text-base font-light items-center">
                         <!--========-->
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                                class="h-4 w-4 mt-2">
+                                class="h-4 w-4">
                                 <path
                                     d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
                             </svg>
@@ -879,11 +934,11 @@
                         <a href="tel:+1541-547-3036">+1 541-547-3036</a>
                     </li>
                     <!--========-->
-                    <li class=" flex space-x-4  text-base font-light break-all">
+                    <li class=" flex space-x-4  text-base font-light break-all items-center">
                         <!--========-->
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"
-                                class="h-4 w-4 mt-2">
+                                class="h-4 w-4">
                                 <path
                                     d="M0 128C0 92.65 28.65 64 64 64H448C483.3 64 512 92.65 512 128V384C512 419.3 483.3 448 448 448H64C28.65 448 0 419.3 0 384V128zM48 128V150.1L220.5 291.7C241.1 308.7 270.9 308.7 291.5 291.7L464 150.1V127.1C464 119.2 456.8 111.1 448 111.1H64C55.16 111.1 48 119.2 48 127.1L48 128zM48 212.2V384C48 392.8 55.16 400 64 400H448C456.8 400 464 392.8 464 384V212.2L322 328.8C283.6 360.3 228.4 360.3 189.1 328.8L48 212.2z" />
                             </svg>
@@ -899,8 +954,24 @@
             <p>© copyrights 2022 Gray's Web Design | All Rights Reserved</p>
         </div>
     </footer>
+
+    <script src="js/datepicker-full.min.js"></script>
     <!--  Alpine Js -->
+    <script defer src="js/alpineCollapse.min.js"></script>
     <script src="js/alpine.min.js" defer></script>
+
+    <script>
+        //CheckInDate
+        const elem1 = document.getElementById('CheckInDate');
+        const datepicker1 = new Datepicker(elem1, {
+            autohide: true,
+        });
+        //CheckOutDate
+        const elem = document.getElementById('CheckOutDate');
+        const datepicker = new Datepicker(elem, {
+            autohide: true,
+        });
+    </script>
 </body>
 
 </html>
